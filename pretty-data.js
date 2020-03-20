@@ -63,7 +63,7 @@ function pp() {
 // ----------------------- XML section ----------------------------------------------------
 
 pp.prototype.xml = function(text) {
-
+	if(text == null) return "";
 	var ar = text.replace(/>\s{0,}</g,"><")
 				 .replace(/</g,"~::~<")
 				 .replace(/xmlns\:/g,"~::~xmlns:")
@@ -145,7 +145,7 @@ pp.prototype.json = function(text) {
 // ----------------------- CSS section ----------------------------------------------------
 
 pp.prototype.css = function(text) {
-
+	if(text == null) return "";
 	var ar = text.replace(/\s{1,}/g,' ')
 				.replace(/\{/g,"{~::~")
 				.replace(/\}/g,"~::~}~::~")
@@ -184,7 +184,7 @@ function isSubquery(str, parenthesisLevel) {
 }
 
 function split_sql(str, tab) {
-
+	if (str == null) return "";
     return str.replace(/\s{1,}/g," ")
 
         .replace(/ AND /ig,"~::~"+tab+tab+"AND ")
@@ -231,7 +231,7 @@ function split_sql(str, tab) {
 }
 
 pp.prototype.sql = function(text) {
-
+	if (text == null) return "";
     var ar_by_quote = text.replace(/\s{1,}/g," ")
                         .replace(/\'/ig,"~::~\'")
                         .split('~::~'),
@@ -286,7 +286,7 @@ pp.prototype.sql = function(text) {
 // ----------------------- min section ----------------------------------------------------
 
 pp.prototype.xmlmin = function(text, preserveComments) {
-
+	if (text == null) return "";
 	var str = preserveComments ? text
 				   : text.replace(/\<![ \r\n\t]*(--([^\-]|[\r\n]|-[^\-])*--[ \r\n\t]*)\>/g,"");
 	return  str.replace(/>\s{0,}</g,"><");
@@ -311,7 +311,7 @@ pp.prototype.jsonmin = function(text) {
 };
 
 pp.prototype.cssmin = function(text, preserveComments) {
-
+	if (text == null) return "";
 	var str = preserveComments ? text
 				   : text.replace(/\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\//g,"") ;
 	return str.replace(/\s{1,}/g,' ')
@@ -323,6 +323,7 @@ pp.prototype.cssmin = function(text, preserveComments) {
 };
 
 pp.prototype.sqlmin = function(text) {
+	if (text == null) return "";
     return text.replace(/\s{1,}/g," ").replace(/\s{1,}\(/,"(").replace(/\s{1,}\)/,")");
 };
 
